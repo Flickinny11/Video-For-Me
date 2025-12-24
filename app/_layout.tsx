@@ -4,6 +4,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
 import { useAppStore } from '../src/store/useAppStore';
+import { configureFal } from '../src/services/falApi';
 
 function TabBarIcon({
   name,
@@ -31,10 +32,19 @@ function TabBarIcon({
 }
 
 export default function TabLayout() {
+  const apiKey = useAppStore((state) => state.apiKey);
   const activeJobs = useAppStore((state) => state.activeJobs);
   const inProgressJobs = activeJobs.filter(
     (job) => job.status === 'in_progress' || job.status === 'queued'
   );
+
+  // Configure Fal.ai client with API key on app start and when key changes
+  useEffect(() => {
+    if (apiKey) {
+      configureFal(apiKey);
+      console.log('Fal.ai configured with API key');
+    }
+  }, [apiKey]);
 
   return (
     <SafeAreaProvider>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -10,7 +10,7 @@ import {
   Linking,
 } from 'react-native';
 import { useAppStore } from '../src/store/useAppStore';
-import { configureFal, validateApiKey } from '../src/services/falApi';
+import { configureFal } from '../src/services/falApi';
 import { SettingsRow } from '../src/components';
 
 export default function SettingsScreen() {
@@ -21,14 +21,17 @@ export default function SettingsScreen() {
     setEnablePromptExpansion,
     enableSafetyChecker,
     setEnableSafetyChecker,
-    resolution,
-    setResolution,
     libraryItems,
     activeJobs,
   } = useAppStore();
 
   const [inputKey, setInputKey] = useState(apiKey);
   const [isSaving, setIsSaving] = useState(false);
+
+  // Sync input field with stored API key when it changes
+  useEffect(() => {
+    setInputKey(apiKey);
+  }, [apiKey]);
 
   const handleSaveApiKey = async () => {
     if (!inputKey.trim()) {

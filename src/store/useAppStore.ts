@@ -85,11 +85,14 @@ interface AppState {
 
 const generateSegmentId = () => Math.random().toString(36).substring(2, 9);
 
+// Default API key - can be updated in Settings
+const DEFAULT_API_KEY = '53b1019d-ddde-4ce7-b291-9271949bbfc1:500671543bb64c583e2f6e9f26c63071';
+
 export const useAppStore = create<AppState>()(
   persist(
     (set, get) => ({
       // API Configuration
-      apiKey: '',
+      apiKey: DEFAULT_API_KEY,
       setApiKey: (key) => set({ apiKey: key }),
 
       // Generation Settings

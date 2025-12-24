@@ -1,5 +1,5 @@
 import * as VideoThumbnails from 'expo-video-thumbnails';
-import * as FileSystem from 'expo-file-system';
+import * as FileSystem from 'expo-file-system/legacy';
 import { ProcessedMedia } from '../types';
 import { resizeImageForWan } from './imageUtils';
 

@@ -9,7 +9,7 @@ import {
   RefreshControl,
 } from 'react-native';
 import * as MediaLibrary from 'expo-media-library';
-import * as FileSystem from 'expo-file-system';
+import * as FileSystem from 'expo-file-system/legacy';
 import { useRouter } from 'expo-router';
 import { useAppStore } from '../src/store/useAppStore';
 import { LibraryCard, MediaViewer } from '../src/components';
