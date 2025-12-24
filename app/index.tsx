@@ -25,7 +25,6 @@ import {
 } from '../src/components';
 import { generate, generateVideoSequence, uploadFile } from '../src/services/falApi';
 import { processImageForUpload } from '../src/utils/imageUtils';
-import { extractAndPrepareLastFrame, parseVideoDuration } from '../src/utils/videoUtils';
 
 export default function GenerateScreen() {
   const router = useRouter();
@@ -260,6 +259,15 @@ export default function GenerateScreen() {
       resetGenerationForm();
     } catch (error) {
       console.error('Generation error:', error);
+      // Update job status to failed
+      const currentJobs = useAppStore.getState().activeJobs;
+      const failedJob = currentJobs.find((j) => j.status === 'queued' || j.status === 'in_progress');
+      if (failedJob) {
+        updateJob(failedJob.id, {
+          status: 'failed',
+          error: error instanceof Error ? error.message : 'Unknown error occurred',
+        });
+      }
       Alert.alert(
         'Generation Failed',
         error instanceof Error ? error.message : 'Unknown error occurred'
