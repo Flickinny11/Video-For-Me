@@ -1,0 +1,63 @@
+{
+  "expo": {
+    "name": "Video-For-Me",
+    "slug": "Video-For-Me",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "dark",
+    "scheme": "videoforme",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#1a1a2e"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.videoforme.app",
+      "infoPlist": {
+        "NSPhotoLibraryUsageDescription": "This app needs access to your photo library to upload images for AI generation.",
+        "NSPhotoLibraryAddUsageDescription": "This app needs permission to save generated videos and images to your library.",
+        "NSCameraUsageDescription": "This app can use your camera to capture images for AI generation."
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#1a1a2e"
+      },
+      "package": "com.videoforme.app",
+      "edgeToEdgeEnabled": true
+    },
+    "web": {
+      "favicon": "./assets/favicon.png",
+      "bundler": "metro"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "The app accesses your photos to let you upload images for AI generation.",
+          "cameraPermission": "The app accesses your camera to capture images for AI generation."
+        }
+      ],
+      [
+        "expo-media-library",
+        {
+          "photosPermission": "Allow Video-For-Me to save generated media to your library.",
+          "savePhotosPermission": "Allow Video-For-Me to save photos and videos."
+        }
+      ]
+    ],
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "your-project-id"
+      }
+    }
+  }
+}
