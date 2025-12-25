@@ -1,4 +1,4 @@
-name: iOS Build and Deploy
+name: Expo Update
 
 on:
   push:
@@ -8,24 +8,11 @@ on:
     paths-ignore:
       - '**.md'
       - '.gitignore'
-  pull_request:
-    branches:
-      - main
   workflow_dispatch:
-    inputs:
-      profile:
-        description: 'Build profile'
-        required: true
-        default: 'simulator'
-        type: choice
-        options:
-          - simulator
-          - preview
-          - production
 
 jobs:
-  build:
-    name: EAS Build for iOS
+  update:
+    name: Publish to Expo Go
     runs-on: ubuntu-latest
 
     steps:
@@ -47,12 +34,12 @@ jobs:
           eas-version: latest
           token: ${{ secrets.EXPO_TOKEN }}
 
-      - name: Build iOS app
+      - name: Publish update
         run: |
-          eas build --platform ios --profile ${{ github.event.inputs.profile || 'simulator' }} --non-interactive
+          eas update --branch preview --message "Auto-update from push" --non-interactive
 
-      - name: Post build link
+      - name: Post update link
         if: success()
         run: |
-          echo "Build submitted! Check your Expo dashboard for the build status."
-          echo "Dashboard: https://expo.dev/projects/temp_videoforme/builds"
+          echo "Update published! Open Expo Go on your iPhone and scan the QR code from your project dashboard."
+          echo "Dashboard: https://expo.dev/projects/temp_videoforme"

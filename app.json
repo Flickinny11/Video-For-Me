@@ -34,6 +34,12 @@
       "favicon": "./assets/favicon.png",
       "bundler": "metro"
     },
+    "runtimeVersion": {
+      "policy": "sdkVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/temp_videoforme"
+    },
     "plugins": [
       "expo-router",
       [
@@ -54,6 +60,9 @@
     "extra": {
       "router": {
         "origin": false
+      },
+      "eas": {
+        "projectId": "temp_videoforme"
       }
     }
   }
