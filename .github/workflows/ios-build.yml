@@ -14,11 +14,12 @@ on:
   workflow_dispatch:
     inputs:
       profile:
-        description: 'Build profile (preview or production)'
+        description: 'Build profile'
         required: true
-        default: 'preview'
+        default: 'simulator'
         type: choice
         options:
+          - simulator
           - preview
           - production
 
@@ -48,10 +49,10 @@ jobs:
 
       - name: Build iOS app
         run: |
-          eas build --platform ios --profile ${{ github.event.inputs.profile || 'preview' }} --non-interactive
+          eas build --platform ios --profile ${{ github.event.inputs.profile || 'simulator' }} --non-interactive
 
       - name: Post build link
         if: success()
         run: |
           echo "Build submitted! Check your Expo dashboard for the build status."
-          echo "Dashboard: https://expo.dev/accounts/YOUR_USERNAME/projects/temp_videoforme/builds"
+          echo "Dashboard: https://expo.dev/projects/temp_videoforme/builds"
